@@ -1,2 +1,9 @@
 node_modules/
 build/
+
+bin/
+target/
+
+.DS_Store
+*.class
+*.jar
