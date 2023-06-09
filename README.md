@@ -1,2 +1,2 @@
-# ACSD20220705
-Repository for the A-CSD course in July 2022
+# ACSD20230612
+Repository for the A-CSD course in June 2023
