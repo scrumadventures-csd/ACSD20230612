@@ -1,12 +1,9 @@
 const bowling = {
-    kockedPins: function(
+    knockedPins: function(
         bowling,
         knockedPins
     ) {
-        return {
-            bowling,
-            knockedPins
-        };
+        return knockedPins;
     }
 }
 module.exports = bowling;
