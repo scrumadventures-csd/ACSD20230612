@@ -1,6 +1,14 @@
 const bowling = {
+    
+    startBowling: function (){
+        return true;
+    },
+
+    isBowling: function (){
+        return true;
+    },
+
     knockedPins: function(
-        bowling,
         knockedPins
     ) {
         return knockedPins;
