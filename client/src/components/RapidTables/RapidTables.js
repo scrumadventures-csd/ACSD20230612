@@ -6,8 +6,8 @@ const defaults = {
 
 const utils = {
     throttle: (callback, limit = 300) => {
-        let lastFunc
-        let lastRan
+        let lastFunc;
+        let lastRan;
         return function() {
             // @ts-ignore
             const context = this;
@@ -63,7 +63,8 @@ const utils = {
     mergeNestedDefaults: (obj, objDefaults, arr) => {
         const mergedObj = {...objDefaults, ...obj};
         mergedObj.responsive = {...objDefaults.responsive, ...obj.responsive};
-        arr.push(structuredClone(mergedObj));
+
+        arr.push({...mergedObj});
     }
 }
 
@@ -88,10 +89,10 @@ const _responsive = {
         });
         const origHiddenColumns = [];
         const newHiddenColumns = [];
-        columns.map((column) => {
+        columns.forEach((column) => {
             origHiddenColumns.push(column.hidden);
         })
-        responsiveColumns.map((column) => {
+        responsiveColumns.forEach((column) => {
             newHiddenColumns.push(column.hidden);
         })
         if(!utils.arraysEqual(origHiddenColumns,newHiddenColumns)){
@@ -110,7 +111,7 @@ const _responsive = {
         columns,
         tableContainer
     }) => {
-        let display = columns.map((column,index) => {
+        let display = columns.forEach((column,index) => {
             return ['all','control'].indexOf(column.responsive.type) > -1;
         });
 
@@ -121,7 +122,7 @@ const _responsive = {
             }
         });
         const order = columns
-            .map((column, index) => {
+            .forEach((column, index) => {
                 return {
                     columnIndex: index,
                     responsivePriority: column.responsive.priority,
@@ -141,16 +142,17 @@ const _responsive = {
         let empty = false;
         order.forEach((column, index) => {
             const columnIndex = column.columnIndex;
+            const newColumnData = {...columns[columnIndex]}
             if(columns[columnIndex].minWidth){
                 if(!column.display && (empty || usedWidth - columns[columnIndex].minWidth < 0)) {
                     empty = true;
-                    columns[columnIndex].hidden = true;
+                    newColumnData.hidden = true;
                 }
                 else {
-                    columns[columnIndex].hidden = false;
+                    newColumnData.hidden = false;
                 }
             }
-
+            columns[columnIndex] = {...newColumnData};
             usedWidth -= columns[columnIndex].minWidth;
         })
         return columns;
@@ -215,7 +217,7 @@ const _responsive = {
     }) {
         const newData = [...data];
         const _this = this;
-        newData.map((item) => {
+        newData.forEach((item) => {
             const detailsObj = _this.handleDetailsObj({
                 data: item,
                 columns
@@ -232,7 +234,7 @@ const _responsive = {
         columns
     }) => {
         const details = {};
-        columns.map((column) => {
+        columns.forEach((column) => {
             if(column.responsive.type !== 'control' && column.visible && column.hidden)
             {
                 details[column.data] = data[column.name];
@@ -247,7 +249,7 @@ const _responsive = {
         tableBody,
         columns
     }) {
-        const resizeColumns = structuredClone(columns);
+        const resizeColumns = [...columns];
         const clonedTable = table.cloneNode(false);
               clonedTable.append(tableHeader.cloneNode(true));
               clonedTable.append(tableBody.cloneNode(true));
@@ -323,7 +325,7 @@ const rapidTables = {
         columns
     }) => {
         const tableHeaders = tableHeader ? Array.from(tableHeader.querySelectorAll('th')) : [];
-        tableHeaders.map((item, index) => {
+        tableHeaders.forEach((item, index) => {
             columns[index].width = '';
             columns[index].width = item.scrollWidth !== 0 ? item.scrollWidth : columns[index].width;
         });
@@ -360,10 +362,10 @@ const rapidTables = {
         setCurrentPage(page);
     },
     handleColumnDefaults: (columns, columnDefaults, columnsDefaults) => {
-        columns.map((item) => {
+        columns.forEach((item) => {
             if(Array.isArray(item))
             {
-                item.map((column) => {
+                item.forEach((column) => {
                     utils.mergeNestedDefaults(column,columnDefaults,columnsDefaults);
                 })
             }
@@ -374,8 +376,9 @@ const rapidTables = {
         });
     },
     handleRowDefaults: (data, rowDefaults, rowsDefaults) => {
-        data.map((row) => {
+        data.forEach((row, index) => {
             utils.mergeNestedDefaults(row,rowDefaults,rowsDefaults);
+            rowsDefaults[index].rowIndex = index;
         });
     }
 }
