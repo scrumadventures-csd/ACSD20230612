@@ -15,22 +15,18 @@ const bowling = {
         return knockedPins;
     },
 
-
-    async registerGame({frames,pins,rolls,test}) {
-
-        await axios.request({
+    async registerGame({frames,pins,rolls,test=''}) {
+        return await axios.request({
             method: 'get',
             maxBodyLength: Infinity,
-            url: 'http://pinsetter.herokuapp.com/pinsetter/?action=register&frames=10&pins=10&rolls=2&test=1-2-3-4-5-6-7-8-9/X12',
+            url: `http://pinsetter.herokuapp.com/pinsetter/?action=register&frames=${frames}&pins=${pins}&rolls=${rolls}&test=${test}`,
             headers: { }
-        })
-            .then((response) => {
-                return response.data.id;
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-        return undefined;
+        }).then((response) => {
+            return response.data;
+        }).catch((error) => {
+            console.log(error);
+            return 'Game failed to register';
+        });
     }
 }
 module.exports = bowling;
