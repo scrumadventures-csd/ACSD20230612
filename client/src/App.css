@@ -1,3 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root, main {
+  height: 100%;
+  width: 100%;
+}
+html{
+  background: linear-gradient(#35008c, #000);
+}
+
 .App {
   text-align: center;
 }
@@ -35,4 +47,20 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.fa-gradient {
+  background: rgb(226, 56, 56);
+  background: linear-gradient(
+          180deg,
+          rgba(255, 185, 0, 1),
+          rgba(247, 130, 0, 1),
+          rgba(226, 56, 56, 1),
+          rgba(151, 57, 153, 1),
+          rgba(0, 156, 223, 1) 91%
+  );
+  color: #61dafb;
+  background-clip: text;
+  border: black 2px;
 }

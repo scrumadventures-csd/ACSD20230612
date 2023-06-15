@@ -1,0 +1,16 @@
+.pagination button:first-child {
+    margin-left: 0;
+    border-top-left-radius: 0.375rem;
+    border-bottom-left-radius: 0.375rem;
+}
+
+.pagination button:last-child {
+    border-top-right-radius: 0.375rem;
+    border-bottom-right-radius: 0.375rem;
+}
+
+.paginationInfo {
+    font-size: 1rem;
+    font-weight: 300;
+    color: #171717;
+}
