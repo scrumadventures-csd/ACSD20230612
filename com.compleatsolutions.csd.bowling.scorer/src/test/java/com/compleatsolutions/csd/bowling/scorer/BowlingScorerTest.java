@@ -47,16 +47,16 @@ public  class  BowlingScorerTest
 //         * @param   aExpectedPins   The expected array of pin counts per ball.
 //         */
 //        /*==============================================================================*/
-//   private  void  assertStringToPins (
-//                                      String  aScoreString,
-//                                      int[]   aExpectedPins
-//                                     )
-//   {
-//      BowlingScorer myBowlingScorer = new BowlingScorer ();
-//      int[]         myPinCounts     = myBowlingScorer.stringToPins (aScoreString);
-//
-//      Assert.assertArrayEquals (myPinCounts, aExpectedPins);
-//   }
+   private  void  assertStringToPins (
+                                      String  aScoreString,
+                                      int[]   aExpectedPins
+                                     )
+   {
+      BowlingScorer myBowlingScorer = new BowlingScorer ();
+      int[]         myPinCounts     = myBowlingScorer.stringToPins (aScoreString);
+
+      Assert.assertArrayEquals (myPinCounts, aExpectedPins);
+   }
 //
 //        /*==============================================================================*/
 //        /** Asserts that the given pin counts per ball are correctly converted to the
@@ -163,20 +163,20 @@ public  class  BowlingScorerTest
 //         */
 //        /*==============================================================================*/
 //   @Test
-//   public  void  testStringToPins_Perfect (
-//                                          )
-//   {
-//      assertStringToPins (
-//                          "XXXXXXXXXXXX",
-//                          new int[] { 10,   10,   10,   10,   10,
-//                                      10,   10,   10,   10,   10,10,10 }
-//                         );
-//   }
-//
-//        /*==============================================================================*/
-//        /** Tests that various score strings are correctly converted to pin counts per ball.
-//         */
-//        /*==============================================================================*/
+   public  void  testStringToPins_Perfect (
+                                         )
+  {
+     assertStringToPins (
+                         "XXXXXXXXXXXX",
+                         new int[] { 10,   10,   10,   10,   10,
+                                     10,   10,   10,   10,   10,10,10 }
+                        );
+  }
+
+    //    /*==============================================================================*/
+    //    /** Tests that various score strings are correctly converted to pin counts per ball.
+    //     */
+    //    /*==============================================================================*/
 //   @Test
 //   public  void  testStringToPins_Open (
 //                                       )
